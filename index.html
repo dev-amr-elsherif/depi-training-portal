@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEPI Workspace | ALX4_SWD8_S1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="border-b border-[rgba(0,240,255,0.15)] bg-[#07090e]/80 backdrop-blur-xl py-3 px-4 md:px-6 flex flex-col md:flex-row justify-between items-center z-50 shadow-[0_4px_30px_rgba(0,0,0,0.5)] relative gap-4 md:gap-0">
+        <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
+            <div class="flex items-center gap-3 group clickable-logo transition-transform hover:scale-[1.02]" onclick="returnToHome()" title="Return to Home">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-gradient-to-br from-gray-900 to-black border border-[var(--neon-cyan)] shadow-[0_0_15px_rgba(0,240,255,0.2)] group-hover:shadow-[0_0_25px_rgba(0,240,255,0.4)] transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-[var(--neon-cyan)] opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--neon-cyan)" class="drop-shadow-[0_0_8px_rgba(0,240,255,0.8)] z-10">
+                        <path d="M14.314 0L2.3 12 6 15.7 21.684.013h-7.357zm.014 11.072L7.857 17.53l3.67 3.67 10.16-10.128h-7.36zM14.314 24H21.68l-5.18-5.178-2.186 2.184L14.314 24z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold tracking-widest uppercase text-white drop-shadow-md leading-none">DEPI <span class="font-light text-[var(--neon-cyan)]">PORTAL</span></h1>
+                    <div class="flex items-center gap-2 mt-1.5">
+                        <span class="text-[8px] md:text-[9px] text-[var(--neon-cyan)] font-code tracking-widest uppercase opacity-80">Cross Platform Mobile App</span>
+                    </div>
+                </div>
+            </div>
+            <button onclick="toggleSidebar()" class="md:hidden text-[var(--neon-cyan)] hover:text-white text-2xl outline-none px-2 transition-colors">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        
+        <div class="flex flex-col items-center justify-center bg-[#0d0f14]/90 border border-[var(--neon-cyan)]/30 px-6 py-1.5 rounded-xl shadow-[0_0_15px_rgba(0,240,255,0.08)] w-full md:w-auto hover:border-[var(--neon-cyan)]/60 transition-colors order-2 md:order-none md:absolute md:left-1/2 md:-translate-x-1/2 group">
+            <span class="text-[9px] text-[var(--neon-cyan)] font-code tracking-widest uppercase mb-0.5 flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-[var(--neon-cyan)] animate-pulse shadow-[0_0_5px_var(--neon-cyan)]"></span>
+                Current Phase
+            </span>
+            <div class="text-lg font-bold text-white tracking-widest flex items-center gap-2 transition-transform group-hover:scale-105">
+                <span class="text-[var(--neon-purple)] opacity-70 font-code">&lt;</span>
+                WEEK <span id="current-week-display" class="neon-text-cyan text-2xl drop-shadow-[0_0_8px_rgba(0,240,255,0.6)]">...</span>
+                <span class="text-[var(--neon-purple)] opacity-70 font-code">/&gt;</span>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-3 w-full md:w-auto order-3 md:order-none justify-end mt-2 md:mt-0">
+            <div class="hidden sm:flex flex-col items-end mr-1 cursor-pointer group" onclick="showAboutScreen()">
+                <span class="text-[10px] text-[var(--neon-purple)] font-code uppercase tracking-wider group-hover:text-[var(--neon-cyan)] transition-colors">Team Leader</span>
+                <span class="text-xs font-bold text-white tracking-wide group-hover:drop-shadow-[0_0_8px_rgba(176,38,255,0.8)] transition-all">Amr F. Elsherif</span>
+            </div>
+            
+            <button onclick="showAboutScreen()" title="Creator Identity" class="glass-panel w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center border border-[var(--neon-purple)]/50 hover:border-[var(--neon-cyan)] hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-all group overflow-hidden relative flex-shrink-0 clickable-profile">
+                <div class="absolute inset-0 bg-gradient-to-br from-[var(--neon-purple)]/10 to-[var(--neon-cyan)]/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <img src="me.png" alt="Developer" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 rounded-xl" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\\\'http://www.w3.org/2000/svg\\\' viewBox=\\\'0 0 24 24\\\' fill=\\\'%23b026ff\\\'%3E%3Cpath d=\\\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\\\'/%3E%3C/svg%3E'">
+            </button>
+        </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden relative">
+        
+        <div id="mobile-overlay" class="fixed inset-0 bg-black/80 z-30 hidden md:hidden backdrop-blur-sm transition-opacity opacity-0" onclick="toggleSidebar()"></div>
+
+        <aside id="sidebar" class="absolute md:relative z-40 w-80 md:w-80 h-full transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out bg-[#07090e]/95 backdrop-blur-xl border-r border-gray-800/80 flex flex-col shadow-[5px_0_25px_rgba(0,0,0,0.5)]">
+            <div class="p-5 border-b border-gray-800/50 flex items-center justify-between bg-gradient-to-r from-[#0d0f14] to-[#11141d]">
+                <span class="font-bold text-gray-200 uppercase tracking-widest text-[11px] flex items-center">
+                    <i class="fa-solid fa-network-wired mr-3 text-[var(--neon-cyan)] text-sm"></i> Roadmap Explorer
+                </span>
+                <div class="w-2 h-2 rounded-full bg-[var(--neon-purple)] animate-pulse shadow-[0_0_8px_var(--neon-purple)]"></div>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-4 font-code text-sm" id="tree-container">
+                <div id="sidebar-loader" class="animate-pulse flex flex-col gap-4">
+                    <div class="h-8 bg-gray-800/50 rounded w-full"></div>
+                    <div class="pl-4 flex flex-col gap-2">
+                        <div class="h-6 bg-gray-800/30 rounded w-3/4"></div>
+                        <div class="h-6 bg-gray-800/30 rounded w-5/6"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 border-t border-gray-800/50 bg-gradient-to-r from-[#0d0f14] to-[#07090e] flex justify-between items-center">
+                <div class="flex items-center gap-3 bg-black/40 px-3 py-1.5 rounded border border-gray-800 transition-colors" id="sync-status-container" title="Google Sheets Connection Status">
+                    <span class="w-2 h-2 rounded-full bg-gray-500 animate-pulse transition-colors duration-300" id="sync-status-dot"></span>
+                    <span class="text-[10px] text-gray-400 font-code tracking-widest uppercase transition-colors duration-300" id="sync-status-text">Connecting...</span>
+                </div>
+                <button onclick="fetchSheetData(true)" class="text-gray-500 hover:text-[var(--neon-cyan)] transition-all outline-none text-sm p-2 rounded hover:bg-white/5 hover:rotate-180 duration-500" title="Force Refresh Data">
+                    <i class="fa-solid fa-rotate-right" id="refresh-icon"></i>
+                </button>
+            </div>
+        </aside>
+
+        <main class="flex-1 p-4 md:p-8 overflow-y-auto relative bg-transparent w-full scroll-smooth" id="main-content">
+            
+            <div id="welcome-screen" class="flex flex-col items-center text-center fade-in px-2 mt-8 md:mt-16 pb-10">
+                <div class="relative mb-8 md:mb-10 mt-4 group">
+                    <div class="absolute inset-0 bg-[var(--neon-cyan)] blur-[80px] opacity-20 rounded-full transition-opacity duration-500 group-hover:opacity-40"></div>
+                    <i class="fa-brands fa-space-awesome text-7xl md:text-9xl text-gray-800 relative z-10 drop-shadow-2xl transition-transform duration-500 group-hover:scale-110"></i>
+                    <i class="fa-solid fa-code absolute bottom-0 right-0 text-3xl md:text-4xl text-[var(--neon-purple)] shadow-[0_0_20px_rgba(176,38,255,0.4)] bg-[#0a0c10] border border-[var(--neon-purple)] rounded-full p-3 z-20 animate-bounce"></i>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 tracking-wide text-white uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-[var(--neon-cyan)] to-gray-500">DEPI Training Portal</h2>
+                
+                <div class="flex flex-wrap justify-center items-center gap-3 md:gap-5 mb-6">
+                    <div class="flex items-center gap-3 bg-[#11141d]/80 px-5 py-2 rounded-full border border-gray-800 shadow-[0_4px_15px_rgba(0,0,0,0.5)] backdrop-blur-sm hover:border-[var(--neon-purple)] transition-colors">
+                        <span class="text-[10px] text-[var(--neon-purple)] font-code uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-layer-group"></i> Group
+                        </span>
+                        <span class="text-xs text-white font-bold tracking-wide">ALX4_SWD8_S1</span>
+                    </div>
+
+                    <div class="flex items-center gap-3 bg-[#11141d]/80 px-5 py-2 rounded-full border border-gray-800 shadow-[0_4px_15px_rgba(0,0,0,0.5)] backdrop-blur-sm hover:border-[var(--neon-cyan)] transition-colors">
+                        <span class="text-[10px] text-[var(--neon-cyan)] font-code uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-chalkboard-user"></i> Instructor
+                        </span>
+                        <span class="text-xs text-white font-bold tracking-wide">Michael Hany</span>
+                    </div>
+                </div>
+
+                <p class="text-gray-400 max-w-lg mb-6 text-xs md:text-sm leading-relaxed font-code">
+                    Welcome to our group's dedicated roadmap. Navigate the sidebar to access session materials, review assignments, and track our progress.
+                    <br><br>
+                    <span class="text-yellow-500/90 bg-yellow-500/10 px-3 py-2 rounded border border-yellow-500/20 inline-block shadow-[0_0_10px_rgba(234,179,8,0.1)] backdrop-blur-sm">
+                        <i class="fa-solid fa-triangle-exclamation mr-1 animate-pulse"></i> Drive access is strictly limited to enrolled DEPI trainees.
+                    </span>
+                </p>
+                
+                <div class="flex flex-col md:flex-row gap-4 w-full max-w-4xl justify-center items-stretch mt-4">
+                    <a href="https://drive.google.com/drive/folders/1MNsHtQi12v-KMdIm1DA4o_zq_-P1ppMR?usp=drive_link" target="_blank" class="glass-panel hover-breathe-cyan px-4 py-4 rounded-xl flex flex-col items-center justify-center gap-2 text-xs font-code border-[var(--neon-cyan)] border-opacity-40 text-white shadow-[0_0_15px_rgba(0,240,255,0.15)] transition-all flex-1 group">
+                        <i class="fa-brands fa-google-drive text-3xl text-[var(--neon-cyan)] group-hover:scale-110 transition-transform drop-shadow-[0_0_8px_rgba(0,240,255,0.6)]"></i>
+                        <span class="tracking-widest uppercase font-bold text-center mt-2 text-sm group-hover:text-[var(--neon-cyan)] transition-colors">All Materials</span>
+                    </a>
+                    <a href="https://harvesttrainingcenter459.sharepoint.com/sites/15/Shared%20Documents/Forms/AllItems.aspx?csf=1&web=1&e=TN9Y69&CID=6b7b42dc%2D14d0%2D4d75%2D8070%2Dd2c55bb1ec6f&FolderCTID=0x012000CC6E3BF08431764180B1454C1D77A8DC&id=%2Fsites%2F15%2FShared%20Documents%2FGeneral%2FRecordings%2FTechnical" target="_blank" class="glass-panel hover-breathe-red px-4 py-4 rounded-xl flex flex-col items-center justify-center gap-2 text-xs font-code border-[var(--neon-red)] border-opacity-40 text-white shadow-[0_0_15px_rgba(255,42,42,0.15)] transition-all flex-1 group">
+                        <i class="fa-solid fa-circle-play text-3xl text-[var(--neon-red)] group-hover:scale-110 transition-transform drop-shadow-[0_0_8px_rgba(255,42,42,0.6)]"></i>
+                        <span class="tracking-widest uppercase font-bold text-center mt-2 text-sm group-hover:text-[var(--neon-red)] transition-colors">All Recordings</span>
+                    </a>
+                    <a href="https://harvesttrainingcenter459.sharepoint.com/:f:/r/sites/Assignments/Shared%20Documents/SWD/%2315.%20ALX4_SWD8_S1?csf=1&web=1&e=zEOC4J" target="_blank" class="glass-panel hover-breathe-purple px-4 py-4 rounded-xl flex flex-col items-center justify-center gap-2 text-xs font-code border-[var(--neon-purple)] border-opacity-40 text-white shadow-[0_0_15px_rgba(176,38,255,0.15)] transition-all flex-1 group">
+                        <i class="fa-solid fa-cloud-arrow-up text-3xl text-[var(--neon-purple)] group-hover:scale-110 transition-transform drop-shadow-[0_0_8px_rgba(176,38,255,0.6)]"></i>
+                        <span class="tracking-widest uppercase font-bold text-center mt-2 text-sm group-hover:text-[var(--neon-purple)] transition-colors">Submit Tasks</span>
+                    </a>
+                </div>
+
+                <div onclick="showAboutScreen()" class="glass-panel clickable-profile w-full max-w-2xl mt-8 px-4 py-3 rounded-lg flex flex-col sm:flex-row items-center justify-center gap-2 text-xs font-code border-gray-800/60 text-gray-400 uppercase tracking-widest bg-gradient-to-r from-transparent via-[#11141d] to-transparent shadow-lg hover:border-[var(--neon-purple)]/50 transition-all duration-300 group">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-code-branch text-[var(--neon-cyan)] opacity-70 group-hover:opacity-100 transition-opacity"></i>
+                        <span>Engineered by</span>
+                    </div>
+                    <span class="text-[var(--neon-purple)] font-bold tracking-widest drop-shadow-[0_0_8px_rgba(176,38,255,0.3)] group-hover:text-white group-hover:drop-shadow-[0_0_12px_rgba(176,38,255,0.8)] transition-all duration-300">Amr Fathy Elsherif</span>
+                    <i class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-300 text-[var(--neon-cyan)]"></i>
+                </div>
+            </div>
+
+            <div id="task-details" class="hidden max-w-4xl mx-auto pb-20">
+                <div class="flex justify-between items-start md:items-center mb-6 gap-4 flex-col md:flex-row border-b border-gray-800/50 pb-4">
+                    <div class="flex items-center gap-2 text-[10px] md:text-xs text-[var(--neon-cyan)] font-code uppercase tracking-wider flex-wrap" id="task-breadcrumb"></div>
+                    <button onclick="returnToHome()" class="text-[10px] md:text-xs font-code text-gray-400 hover:text-white transition-all flex items-center gap-2 bg-[#11141d] hover:bg-[var(--neon-cyan)]/10 px-3 py-1.5 rounded border border-gray-800 hover:border-[var(--neon-cyan)] shadow-sm group whitespace-nowrap">
+                        <i class="fa-solid fa-house text-[var(--neon-cyan)] group-hover:scale-110 transition-transform"></i> Return Home
+                    </button>
+                </div>
+                
+                <div class="flex flex-col md:flex-row justify-between items-start mb-8 gap-4">
+                    <div class="w-full">
+                        <div class="flex items-center gap-3 mb-2 flex-wrap">
+                            <h2 class="text-3xl md:text-4xl font-bold text-white uppercase tracking-wide break-words drop-shadow-md" id="task-title">Task Title</h2>
+                            <span id="task-day-badge-large" class="hidden"></span>
+                        </div>
+                        <div class="flex flex-wrap gap-3 md:gap-4 mt-4">
+                            <span class="bg-[#11141d] border border-gray-700 shadow-inner text-xs px-3 md:px-4 py-2 rounded-md text-gray-300 font-code flex items-center gap-2 transition-colors hover:border-gray-500">
+                                <i class="fa-regular fa-calendar-days text-[var(--neon-cyan)]"></i> <span id="task-week">Week X</span>
+                            </span>
+                            <span class="bg-[rgba(176,38,255,0.05)] border border-[rgba(176,38,255,0.3)] shadow-[0_0_10px_rgba(176,38,255,0.1)] text-xs px-3 md:px-4 py-2 rounded-md text-white font-code flex items-center gap-2 transition-colors hover:border-[var(--neon-purple)]">
+                                <i class="fa-solid fa-layer-group text-[var(--neon-purple)]"></i> <span id="task-track">Track Name</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-5 md:p-8 rounded-xl mb-8 relative overflow-hidden border-t-2 border-t-[var(--neon-cyan)] hover:shadow-[0_8px_32px_0_rgba(0,240,255,0.15)]">
+                    <div class="absolute top-0 right-0 w-32 md:w-48 h-32 md:h-48 bg-gradient-to-bl from-[var(--neon-cyan)] to-transparent opacity-10 rounded-bl-full pointer-events-none"></div>
+                    <div class="absolute bottom-0 left-0 w-24 md:w-32 h-24 md:h-32 bg-gradient-to-tr from-[var(--neon-purple)] to-transparent opacity-5 rounded-tr-full pointer-events-none"></div>
+                    
+                    <h3 class="text-base md:text-lg font-bold mb-6 text-white uppercase tracking-widest flex items-center gap-3 border-b border-gray-800 pb-4">
+                        <i class="fa-solid fa-terminal text-[var(--neon-cyan)]"></i> Mission Briefing
+                    </h3>
+                    <div class="text-gray-300 leading-relaxed text-sm font-code whitespace-pre-wrap pl-3 md:pl-4 border-l-2 border-gray-800 break-words" id="task-description-content"></div>
+
+                    <div class="mt-8 pt-6 border-t border-gray-800/60 bg-black/20 p-4 md:p-5 rounded-lg border border-gray-800/50">
+                        <h4 class="text-[var(--neon-purple)] font-bold mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved"></i> Required Protocol
+                        </h4>
+                        <ul class="list-none space-y-3 text-sm text-gray-400 font-code text-[12px] md:text-[13px]">
+                            <li class="flex items-start gap-3 p-2 hover:bg-white/5 rounded transition-colors border border-transparent hover:border-gray-800">
+                                <i class="fa-solid fa-check text-[var(--neon-cyan)] mt-0.5 text-xs drop-shadow-[0_0_5px_var(--neon-cyan)]"></i> 
+                                <span>Review all session materials and watch the technical recording (if available) before commencing your mission.</span>
+                            </li>
+                            <li class="flex items-start gap-3 p-2 hover:bg-white/5 rounded transition-colors border border-transparent hover:border-gray-800">
+                                <i class="fa-solid fa-check text-[var(--neon-cyan)] mt-0.5 text-xs drop-shadow-[0_0_5px_var(--neon-cyan)]"></i> 
+                                <span>Ensure your code is clean, adheres to DEPI best practices, and is successfully pushed to your GitHub repository.</span>
+                            </li>
+                            <li class="flex items-start gap-3 p-2 hover:bg-white/5 rounded transition-colors border border-transparent hover:border-gray-800">
+                                <i class="fa-solid fa-check text-[var(--neon-cyan)] mt-0.5 text-xs drop-shadow-[0_0_5px_var(--neon-cyan)]"></i> 
+                                <span>Upload your final deliverables via the <span class="text-[var(--neon-purple)] font-bold">Submit Task</span> portal before the deadline.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4 mt-2">
+                    <div id="task-actions" class="w-full flex flex-col md:flex-row gap-4 flex-wrap"></div>
+                </div>
+            </div>
+
+            <div id="about-screen" class="hidden max-w-5xl mx-auto pb-20 relative">
+                
+                <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[var(--neon-purple)]/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
+
+                <div class="flex justify-between items-center mb-8 border-b border-gray-800/50 pb-4 relative z-10">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-fingerprint text-2xl text-[var(--neon-cyan)] drop-shadow-[0_0_8px_rgba(0,240,255,0.6)]"></i>
+                        <h2 class="text-sm font-code uppercase tracking-widest text-gray-300">Creator Identity</h2>
+                    </div>
+                    <button onclick="returnToHome()" class="text-[10px] md:text-xs font-code text-gray-400 hover:text-white transition-all flex items-center gap-2 bg-[#11141d] hover:bg-[var(--neon-cyan)]/10 px-3 py-1.5 rounded border border-gray-800 hover:border-[var(--neon-cyan)] shadow-sm group whitespace-nowrap">
+                        <i class="fa-solid fa-house text-[var(--neon-cyan)] group-hover:scale-110 transition-transform"></i> System Core
+                    </button>
+                </div>
+
+                <div class="glass-panel p-6 md:p-10 rounded-2xl mb-8 flex flex-col lg:flex-row items-center gap-8 relative z-10 overflow-hidden border-[var(--neon-purple)]/30 hover:border-[var(--neon-purple)]/60 transition-colors duration-500">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[var(--neon-purple)] to-transparent opacity-20 rounded-bl-full"></div>
+                    
+                    <div class="relative profile-img-container flex-shrink-0 w-32 h-32 md:w-48 md:h-48 z-10">
+                        <div class="w-full h-full rounded-full overflow-hidden border-2 border-[var(--bg-dark)] shadow-[0_0_30px_rgba(176,38,255,0.4)]">
+                            <img src="me.png" alt="Amr F. Elsherif" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\\\'http://www.w3.org/2000/svg\\\' viewBox=\\\'0 0 24 24\\\' fill=\\\'%2311141d\\\'%3E%3Crect width=\\\'24\\\' height=\\\'24\\\' fill=\\\'%2311141d\\\'/%3E%3Cpath d=\\\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\\\' fill=\\\'%2300f0ff\\\'/%3E%3C/svg%3E'">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col items-center lg:items-start text-center lg:text-left w-full z-10">
+                        <h1 class="text-3xl md:text-5xl font-bold text-white mb-2 uppercase tracking-wider glitch-text drop-shadow-lg" data-text="Amr F. Elsherif">Amr F. Elsherif</h1>
+                        <h2 class="text-[var(--neon-cyan)] font-code tracking-widest text-sm md:text-base mb-4 drop-shadow-[0_0_5px_rgba(0,240,255,0.4)]">Software Engineer | Mobile & Backend Systems</h2>
+                        
+                        <div class="mb-6 h-8 flex items-center justify-center lg:justify-start w-full max-w-lg">
+                            <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=18&duration=3000&pause=1000&color=00f0ff&center=false&vCenter=true&width=500&lines=Hi,+I'm+Sherif+👋;Designing+Scalable+Software+Systems+🚀;Building+Cross-Platform+Mobile+Apps+💻;Team+Leader+@+DEPI+🎯" alt="Typing Text" class="w-full" />
+                        </div>
+
+                        <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                            <a href="https://www.linkedin.com/in/amr-fathy-elsherif/" target="_blank" class="bg-[#11141d] hover:bg-[#0077b5]/20 border border-gray-700 hover:border-[#0077b5] text-white p-3 rounded-full transition-all hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(0,119,181,0.4)]" title="LinkedIn">
+                                <i class="fa-brands fa-linkedin-in w-5 h-5 flex items-center justify-center text-lg"></i>
+                            </a>
+                            <a href="https://github.com/dev-amr-elsherif" target="_blank" class="bg-[#11141d] hover:bg-white/10 border border-gray-700 hover:border-gray-400 text-white p-3 rounded-full transition-all hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(255,255,255,0.2)]" title="GitHub">
+                                <i class="fa-brands fa-github w-5 h-5 flex items-center justify-center text-lg"></i>
+                            </a>
+                            <a href="https://dev-amr-elsherif.github.io/" target="_blank" class="bg-[#11141d] hover:bg-[var(--neon-purple)]/20 border border-gray-700 hover:border-[var(--neon-purple)] text-white p-3 rounded-full transition-all hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(176,38,255,0.4)]" title="Portfolio">
+                                <i class="fa-solid fa-globe w-5 h-5 flex items-center justify-center text-lg"></i>
+                            </a>
+                            <a href="mailto:dev.amrelsherif@gmail.com" class="bg-[#11141d] hover:bg-[var(--neon-red)]/20 border border-gray-700 hover:border-[var(--neon-red)] text-white p-3 rounded-full transition-all hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(255,42,42,0.4)]" title="Email">
+                                <i class="fa-solid fa-envelope w-5 h-5 flex items-center justify-center text-lg"></i>
+                            </a>
+                            <a href="./Amr_Elsherif_Resume.pdf" target="_blank" class="bg-[#11141d] hover:bg-[var(--neon-cyan)]/20 border border-gray-700 hover:border-[var(--neon-cyan)] text-white p-3 rounded-full transition-all hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(0,240,255,0.4)]" title="Resume PDF">
+                                <i class="fa-solid fa-file-pdf w-5 h-5 flex items-center justify-center text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 relative z-10">
+                    
+                    <div class="lg:col-span-2 flex flex-col gap-6">
+                        <div class="glass-panel rounded-xl overflow-hidden border-gray-800">
+                            <div class="bg-[#0d0f14] px-4 py-2 flex items-center gap-2 border-b border-gray-800">
+                                <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                                <span class="ml-2 text-[10px] font-code text-gray-500 uppercase tracking-widest">dev_profile.sh</span>
+                            </div>
+                            <div class="p-5 font-code text-sm text-gray-300 leading-relaxed bg-[#0a0c10]/50">
+                                <p><span class="text-[var(--neon-purple)]">~$</span> <span class="text-white">whoami</span></p>
+                                <p class="mt-2 text-gray-400">📍 Alexandria, Egypt | ECE Student @ Damanhur Univ. (Class of '27)</p>
+                                <p class="mt-2 text-gray-400">I engineer software systems — not just mobile apps. Coming from an engineering background, I combine analytical problem-solving with modern development tools to deliver maintainable and user-centered digital products. I focus on Architecture, Scalability, and Clean Code.</p>
+                                <br>
+                                <p><span class="text-[var(--neon-cyan)]">~$</span> <span class="text-white">cat current_focus.txt</span></p>
+                                <ul class="mt-2 space-y-2 text-gray-400">
+                                    <li><i class="fa-solid fa-angle-right text-[var(--neon-cyan)] mr-2"></i> Designing scalable systems using Clean Architecture.</li>
+                                    <li><i class="fa-solid fa-angle-right text-[var(--neon-cyan)] mr-2"></i> Building cross-platform apps with Flutter & Dart.</li>
+                                    <li><i class="fa-solid fa-angle-right text-[var(--neon-cyan)] mr-2"></i> Integrating REST APIs & Backend Services (PHP/Laravel).</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel p-6 rounded-xl border-t-2 border-t-[var(--neon-cyan)]">
+                            <h3 class="text-sm font-bold text-white uppercase tracking-widest mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-layer-group text-[var(--neon-cyan)]"></i> Tech Stack Arsenal
+                            </h3>
+                            <div class="flex justify-center bg-black/30 p-4 rounded-lg border border-gray-800/50 mb-6">
+                                <a href="https://skillicons.dev" target="_blank" class="w-full flex justify-center hover:scale-105 transition-transform">
+                                    <img src="https://skillicons.dev/icons?i=dart,flutter,firebase,php,laravel,mysql,sqlite,html,bootstrap,git,github,vscode,androidstudio,postman,figma,css&theme=dark&perline=8" alt="Core Tech Stack" class="max-w-full h-auto"/>
+                                </a>
+                            </div>
+                            
+                            <h4 class="text-[11px] font-code text-[var(--neon-purple)] uppercase tracking-widest mb-3">Architecture & State Management</h4>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <img src="https://img.shields.io/badge/Clean_Architecture-000000?style=for-the-badge&logo=codeforces&logoColor=00F0FF" alt="Clean Architecture" class="h-6 object-cover rounded shadow-sm">
+                                <img src="https://img.shields.io/badge/BLoC_(Primary)-000000?style=for-the-badge&logo=dart&logoColor=7A5CFF" alt="BLoC" class="h-6 object-cover rounded shadow-sm">
+                                <img src="https://img.shields.io/badge/GetX_(Secondary)-000000?style=for-the-badge&logo=flutter&logoColor=00F0FF" alt="GetX" class="h-6 object-cover rounded shadow-sm">
+                                <img src="https://img.shields.io/badge/Dependency_Injection_(get__it)-000000?style=for-the-badge&logo=dart&logoColor=7A5CFF" alt="get_it" class="h-6 object-cover rounded shadow-sm">
+                            </div>
+
+                            <h4 class="text-[11px] font-code text-[var(--neon-cyan)] uppercase tracking-widest mb-3">Networking & Data</h4>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <img src="https://img.shields.io/badge/Dio-000000?style=for-the-badge&logo=dart&logoColor=00F0FF" alt="Dio" class="h-6 object-cover rounded shadow-sm">
+                                <img src="https://img.shields.io/badge/RESTful_APIs-000000?style=for-the-badge&logo=json&logoColor=7A5CFF" alt="REST APIs" class="h-6 object-cover rounded shadow-sm">
+                                <img src="https://img.shields.io/badge/Hive-000000?style=for-the-badge&logo=apachehive&logoColor=00F0FF" alt="Hive" class="h-6 object-cover rounded shadow-sm">
+                                <img src="https://img.shields.io/badge/Shared_Preferences-000000?style=for-the-badge&logo=android&logoColor=7A5CFF" alt="SharedPreferences" class="h-6 object-cover rounded shadow-sm">
+                            </div>
+
+                            <h4 class="text-[11px] font-code text-red-400 uppercase tracking-widest mb-3">Cloud Services</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <img src="https://img.shields.io/badge/Firebase_Auth-000000?style=for-the-badge&logo=firebase&logoColor=00F0FF" alt="Firebase Auth" class="h-6 object-cover rounded shadow-sm">
+                                <img src="https://img.shields.io/badge/Cloud_Firestore-000000?style=for-the-badge&logo=firebase&logoColor=7A5CFF" alt="Cloud Firestore" class="h-6 object-cover rounded shadow-sm">
+                                <img src="https://img.shields.io/badge/FCM_(Push)-000000?style=for-the-badge&logo=firebase&logoColor=7A5CFF" alt="FCM" class="h-6 object-cover rounded shadow-sm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-6">
+                        <div class="glass-panel p-6 rounded-xl border-t-2 border-t-[var(--neon-purple)] h-full">
+                            <h3 class="text-sm font-bold text-white uppercase tracking-widest mb-6 flex items-center gap-2">
+                                <i class="fa-solid fa-users-gear text-[var(--neon-purple)]"></i> Leadership
+                            </h3>
+                            <ul class="space-y-4 font-code text-xs text-gray-400">
+                                <li class="flex items-start gap-3 bg-black/20 p-3 rounded-lg border border-gray-800">
+                                    <i class="fa-solid fa-trophy text-yellow-500 mt-0.5 text-sm drop-shadow-[0_0_5px_rgba(234,179,8,0.6)]"></i>
+                                    <span>Team Leader at <strong class="text-white font-rajdhani text-sm tracking-wide">Digital Egypt Pioneers Initiative (DEPI)</strong>.</span>
+                                </li>
+                                <li class="flex items-start gap-3 bg-black/20 p-3 rounded-lg border border-gray-800">
+                                    <i class="fa-solid fa-code-branch text-[var(--neon-cyan)] mt-0.5 text-sm drop-shadow-[0_0_5px_rgba(0,240,255,0.6)]"></i>
+                                    <span>Leading the <strong class="text-white font-rajdhani text-sm tracking-wide">DevSync Team</strong> for graduation project.</span>
+                                </li>
+                                <li class="flex items-start gap-3 bg-black/20 p-3 rounded-lg border border-gray-800">
+                                    <i class="fa-solid fa-handshake-angle text-[var(--neon-purple)] mt-0.5 text-sm drop-shadow-[0_0_5px_rgba(176,38,255,0.6)]"></i>
+                                    <span>Agile task distribution, technical planning, and GitHub collaboration.</span>
+                                </li>
+                            </ul>
+
+                            <h3 class="text-sm font-bold text-white uppercase tracking-widest mt-8 mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-fire text-red-500"></i> Pinned Projects
+                            </h3>
+                            <div class="flex flex-col gap-3">
+                                <a href="https://github.com/dev-amr-elsherif/devsync_flutter" target="_blank" class="block border border-gray-700 hover:border-[var(--neon-cyan)] rounded-lg overflow-hidden group transition-all relative">
+                                    <div class="absolute inset-0 bg-[var(--neon-cyan)]/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    <img src="https://opengraph.githubassets.com/1/dev-amr-elsherif/devsync_flutter" alt="DevSync" class="w-full object-cover">
+                                    <div class="p-2 bg-[#0a0c10] text-[10px] font-code text-gray-400 text-center">AI Dev Matching Platform</div>
+                                </a>
+                                <a href="https://github.com/dev-amr-elsherif/Flutter-Dart-Specialization-Packt" target="_blank" class="block border border-gray-700 hover:border-[var(--neon-green)] rounded-lg overflow-hidden group transition-all relative">
+                                    <div class="absolute inset-0 bg-[var(--neon-green)]/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    <img src="https://opengraph.githubassets.com/1/dev-amr-elsherif/Flutter-Dart-Specialization-Packt" alt="Flutter Dart Specialization" class="w-full object-cover">
+                                    <div class="p-2 bg-[#0a0c10] text-[10px] font-code text-gray-400 text-center">Advanced Mobile Concepts</div>
+                                </a>
+                                <a href="https://github.com/dev-amr-elsherif/Tech-Learning-Journey" target="_blank" class="block border border-gray-700 hover:border-[var(--neon-purple)] rounded-lg overflow-hidden group transition-all relative">
+                                    <div class="absolute inset-0 bg-[var(--neon-purple)]/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    <img src="https://opengraph.githubassets.com/1/dev-amr-elsherif/Tech-Learning-Journey" alt="Learning Journey" class="w-full object-cover">
+                                    <div class="p-2 bg-[#0a0c10] text-[10px] font-code text-gray-400 text-center">Tech Learning Vault</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 md:p-8 rounded-xl relative z-10 border-gray-800">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-widest mb-6 flex items-center gap-2 justify-center">
+                        <i class="fa-brands fa-github text-gray-300 text-xl"></i> System Commits & Metrics
+                    </h3>
+                    
+                    <div class="w-full flex justify-center mb-6">
+                        <img src="https://nirzak-streak-stats.vercel.app/?user=dev-amr-elsherif&background=0D1117&stroke=7A5CFF&ring=009DFF&fire=00F0FF&currStreakNum=00FFA3&currStreakLabel=009DFF&sideNums=009DFF&sideLabels=7A5CFF&dates=009DFF&hide_border=true" alt="GitHub Streak" class="w-full max-w-4xl rounded-lg shadow-lg border border-gray-800" />
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-4 mt-4">
+                        <a href="https://github.com/dev-amr-elsherif?tab=followers" target="_blank" class="hover:scale-105 transition-transform"><img src="https://img.shields.io/github/followers/dev-amr-elsherif?label=Followers&style=flat-square&color=009DFF" alt="Followers" /></a>
+                        <a href="https://github.com/dev-amr-elsherif?tab=repositories" target="_blank" class="hover:scale-105 transition-transform"><img src="https://img.shields.io/badge/Repositories-7-009DFF?style=flat-square" alt="Repositories" /></a>
+                        <a href="https://github.com/dev-amr-elsherif?tab=stars" target="_blank" class="hover:scale-105 transition-transform"><img src="https://img.shields.io/github/stars/dev-amr-elsherif?label=Stars&style=flat-square&color=009DFF" alt="Stars" /></a>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-5 right-5 left-5 md:left-auto md:w-80 z-[100] flex flex-col gap-3 pointer-events-none"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
